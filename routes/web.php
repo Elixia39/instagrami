@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Route::get('/photos/{photo}/download','PhotoController@download');
+
 Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+

@@ -4,18 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePhoto;
 use App\Photo;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Comment;
+use App\Http\Requests\StoreComment;
 
 class PhotoController extends Controller
 {
     public function __construct()
     {
         // 認証が必要
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index','download','show']);
+    }
+
+    public function index()
+    {
+        $photos = Photo::with(['owner'])->orderBy(Photo::CREATED_AT,'desc')->paginate();
+
+        return $photos;
     }
 
     /**
@@ -55,5 +65,58 @@ class PhotoController extends Controller
         // リソースの新規作成なので
         // レスポンスコードは201(CREATED)を返却する
         return response($photo, 201);
+    }
+
+    public function download(Photo $photo)
+    {
+        if (! Storage::exists('public/photos/'.$photo->filename)) {
+            abort(404);
+        }
+
+        $filePath = 'public/photos/'.$photo->filename;
+        $mimeType = Storage::mimeType($filePath);
+        $disposition = 'attachment; filename="'.$photo->filename.'"';
+        $headers = [
+            //'Content-Type' => 'application/octet-stream',
+            'Content-Type' => $mimeType,
+            'Content-Disposition' => $disposition,
+        ];
+
+
+        // dd(storage_path('/public/photos/'),
+        // Storage::path('/public/photos/'),
+        // Storage::disk('local')->download($filePath),
+        // Storage::download($filePath,$photo->filename,$headers),
+        // Storage::mimeType('public/photos/'.$photo->filename)
+        // );
+
+        //return Storage::download($filePath,$photo->filename,$headers);
+        return response(Storage::get('public/photos/'.$photo->filename),200,$headers);
+    }
+
+    public function show(string $id)
+    {
+        $photo = Photo::where('id',$id)->with(['owner','comments.author'])->first();
+
+        return $photo ?? abort(404);
+    }
+
+    /**
+     * コメント投稿
+     * @param Photo $photo
+     * @param StoreComment $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addComment(Photo $photo, StoreComment $request)
+    {
+        $comment = new Comment();
+        $comment->content = $request->get('content');
+        $comment->user_id = Auth::user()->id;
+        $photo->comments()->save($comment);
+
+        // authorリレーションをロードするためにコメントを取得しなおす
+        $new_comment = Comment::where('id', $comment->id)->with('author')->first();
+
+        return response($new_comment, 201);
     }
 }

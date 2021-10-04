@@ -3,8 +3,13 @@
         <button v-if="isLogin" class="button button--link" @click="logout">
             Logout
         </button>
+
         <RouterLink v-else class="button button--link" to="/login">
-            Login / Register
+            <!-- ここは後で変えるやつ -->
+            <button class="button neon">
+                Login / Register
+                <span></span><span></span><span></span><span></span>
+            </button>
         </RouterLink>
     </footer>
 </template>

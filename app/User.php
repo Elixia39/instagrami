@@ -10,10 +10,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public function photos()
-    {
-        return $this->hasMany('App\Photo');
-    }
+    protected $visible = [
+        'name',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -29,9 +28,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    // protected $hidden = [
+    //     'password', 'remember_token',
+    // ];
 
     /**
      * The attributes that should be cast to native types.
@@ -41,4 +40,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function photos()
+    {
+        return $this->hasMany('App\Photo');
+    }
 }

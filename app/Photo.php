@@ -4,11 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
     // ぷらいまりきー
     protected $keyType = 'string';
+
+    protected $visible = [
+        'id','owner','url','comments',
+    ];
+
+    protected $appends = [
+        'url',
+    ];
+
+    protected $perPage = 9;
 
     //public $incrementing = false;
 
@@ -51,6 +62,21 @@ class Photo extends Model
         }
 
         return $id;
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo('App\User','user_id','id','users');
+    }
+
+    public function getUrlAttribute()
+    {
+        return Storage::url('photos/'. $this->attributes['filename']);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment')->orderBy('id', 'desc');
     }
 
 }
