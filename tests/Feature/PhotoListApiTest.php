@@ -19,7 +19,7 @@ class PhotoListApiTest extends TestCase
      */
     public function should_正しい構造のJSONを返却する()
     {
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         // 5つの写真データを生成する
         factory(Photo::class, 5)->create();
 
@@ -36,6 +36,8 @@ class PhotoListApiTest extends TestCase
                 'owner' => [
                     'name' => $photo->owner->name,
                 ],
+                'liked_by_user' => false,
+                'likes_count' => 0
             ];
         })
         ->all();
@@ -46,6 +48,8 @@ class PhotoListApiTest extends TestCase
             // レスポンスJSONのdata項目が期待値と合致すること
             ->assertJsonFragment([
                 "data" => $expected_data,
+                'liked_by_user' => false,
+                'likes_count' => 0
             ]);
     }
 }
