@@ -27,6 +27,20 @@
         padding: 1.5rem;
     }
 
+    &__B-board {
+        background-color: #ffffffe0;
+
+        // border-top: 15px solid #9e640e;
+        // border-right: 15px solid #9e640e;
+        // border-left: 15px solid #9e640e;
+        // border-bottom: 15px solid #9e640e;
+
+        box-shadow: inset 0 0 10px #000;
+
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+    }
+
     &__panel {
         width: 49%;
     }
@@ -68,10 +82,5 @@
     &__commentInfo {
         color: $grey-2;
         margin: 0;
-    }
-
-    &__modoru {
-        display: flex;
-        flex-wrap: wrap;
     }
 }

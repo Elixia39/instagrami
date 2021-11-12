@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="photo"
-        class="photo-detail photo-detail__B-color"
+        class="photo-detail photo-detail__B-board"
         :class="{ 'photo-detail--column': fullWidth }"
     >
         <figure
@@ -40,7 +40,7 @@
                         {{ comment.content }}
                     </p>
                     <p class="photo-detail__commentInfo">
-                        {{ comment.author.name }}
+                        Commented by {{ comment.author.name }}
                     </p>
                 </li>
             </ul>

@@ -1,6 +1,6 @@
 .navbar {
     align-items: center;
-    background: #fff;
+    background: #00000091;
     box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
     display: flex;
     height: 4rem;
@@ -11,6 +11,7 @@
     right: 0;
     top: 0;
     z-index: 3;
+    color: white;
 
     &__brand {
         color: inherit;

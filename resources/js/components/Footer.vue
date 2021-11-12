@@ -6,7 +6,7 @@
 
         <RouterLink v-else class="button button--link" to="/login">
             <!-- ここは後で変えるやつ -->
-            <button class="button neon">
+            <button class="button neon__gaming">
                 Login / Register
                 <span></span><span></span><span></span><span></span>
             </button>
@@ -31,7 +31,7 @@ export default {
             await this.$store.dispatch("auth/logout");
             if (this.apiStatus) {
                 this.$router.push("/login");
-                //this.$router.go({ path: "/login", force: true });
+                this.$router.go({ path: "/login", force: true });
             }
         }
     }

@@ -10,6 +10,49 @@
     overflow: hidden;
     transition: 0.2s;
 
+    &__gaming {
+        background: linear-gradient(to right, Magenta, yellow, Cyan, Magenta) 0%
+            center/200%;
+        animation: gaming 2s linear infinite;
+        padding: 20px 25px;
+    }
+    @keyframes gaming {
+        /* backgroundを移動させる */
+        100% {
+            background-position-x: 200%;
+        }
+    }
+
+    &__loading {
+        animation: rainbow 5s infinite;
+    }
+    @keyframes rainbow {
+        12% {
+            color: #ff5353;
+        }
+        24% {
+            color: #ffcf53;
+        }
+        36% {
+            color: #e8ff53;
+        }
+        48% {
+            color: #53ff5d;
+        }
+        60% {
+            color: #53ffbc;
+        }
+        72% {
+            color: #5393ff;
+        }
+        84% {
+            color: #ca53ff;
+        }
+        100% {
+            color: #ff53bd;
+        }
+    }
+
     &:hover {
         color: #fdfa31;
         background: #ffffff;

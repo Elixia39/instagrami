@@ -4,7 +4,7 @@
         <div v-show="loading" class="card">
             <Loader> Sending your photo... </Loader>
         </div>
-        <form v-show="!loading" class="form" @submit.prevent="submit">
+        <form v-show="!loading" class="photoform" @submit.prevent="submit">
             <div class="errors" v-if="errors">
                 <ul v-if="errors.photo">
                     <li v-for="msg in errors.photo" :key="msg">{{ msg }}</li>
@@ -106,7 +106,7 @@ export default {
                 timeout: 6000
             });
 
-            this.$router.push(`/photos/${response.data.id}`);
+            this.$router.push(`/`);
         }
     }
 };

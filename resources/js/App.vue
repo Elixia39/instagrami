@@ -1,5 +1,9 @@
 <template>
     <div class="momomo">
+        <!-- <Cube /> -->
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+        <div class="clouds"></div>
         <header>
             <Navbar />
         </header>
@@ -18,9 +22,12 @@
 </template>
 
 <script>
+import { VueLoading } from "vue-loading-template";
+
 import Message from "./components/Message.vue";
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
+import Cube from "./components/Cube.vue";
 
 import { INTERNAL_SERVER_ERROR, NOT_FOUND, UNAUTHORIZED } from "./util";
 
@@ -28,7 +35,9 @@ export default {
     components: {
         Message,
         Navbar,
-        Footer
+        Footer,
+        VueLoading,
+        Cube
     },
     computed: {
         errorCode() {

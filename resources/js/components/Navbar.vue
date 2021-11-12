@@ -15,7 +15,7 @@
                 {{ username }}
             </span>
             <div v-else class="navbar__item">
-                <RouterLink class="button button--link" to="/login">
+                <RouterLink class="button kiraButton button--link" to="/login">
                     Login / Register
                 </RouterLink>
             </div>

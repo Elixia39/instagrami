@@ -1,10 +1,32 @@
 .container {
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 0 2%;
-
-  &--small {
     margin: 0 auto;
-    max-width: 600px;
-  }
+    max-width: 1200px;
+    padding: 0 2%;
+    position: relative;
+
+    &--small {
+        margin: 0 auto;
+        max-width: 700px;
+    }
 }
+
+// @media screen and (max-width: 959px) {
+//     /* 959px以下に適用されるCSS（タブレット用） */
+//     .container {
+//         max-width: 100%;
+//         &--small {
+//             margin: 0 auto;
+//             max-width: 100%;
+//         }
+//     }
+// }
+// @media screen and (max-width: 480px) {
+//     /* 480px以下に適用されるCSS（スマホ用） */
+//     .container {
+//         max-width: 100%;
+//         &--small {
+//             margin: 0 auto;
+//             max-width: 100%;
+//         }
+//     }
+// }
