@@ -34,7 +34,10 @@ class PhotoListApiTest extends TestCase
                 'id' => $photo->id,
                 'url' => $photo->url,
                 'owner' => [
-                    'name' => $photo->owner->name,
+                    "id" => $photo->owner->id,
+                    "name" => $photo->owner->name,
+                    "profile_image" => "default.png",
+                    "url" => "/storage/profiles/default.png",
                 ],
                 'liked_by_user' => false,
                 'likes_count' => 0

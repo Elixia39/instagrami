@@ -84,3 +84,15 @@
         margin: 0;
     }
 }
+
+.photo-detail2 {
+    $component: &;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &__panel {
+        width: 55%;
+        text-align: center;
+    }
+}

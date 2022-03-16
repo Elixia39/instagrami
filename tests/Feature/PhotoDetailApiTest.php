@@ -17,6 +17,8 @@ class PhotoDetailApiTest extends TestCase
      */
     public function should_正しい構造のJSONを返却する()
     {
+        $this->withoutExceptionHandling();
+
         factory(Photo::class)->create()->each(function ($photo) {
             $photo->comments()->saveMany(factory(Comment::class, 3)->make());
         });
@@ -31,7 +33,10 @@ class PhotoDetailApiTest extends TestCase
                 'id' => $photo->id,
                 'url' => $photo->url,
                 'owner' => [
-                    'name' => $photo->owner->name,
+                    "id" => $photo->owner->id,
+                    "name" => $photo->owner->name,
+                    "profile_image" => "default.png",
+                    "url" => "/storage/profiles/default.png",
                 ],
                 'liked_by_user' => false,
                 'likes_count' => 0,
@@ -40,7 +45,10 @@ class PhotoDetailApiTest extends TestCase
                     ->map(function ($comment) {
                         return [
                             'author' => [
-                                'name' => $comment->author->name,
+                                "id" => $comment->author->id,
+                                "name" => $comment->author->name,
+                                "profile_image" => "default.png",
+                                "url" => "/storage/profiles/default.png",
                             ],
                             'content' => $comment->content,
                         ];

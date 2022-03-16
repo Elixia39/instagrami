@@ -21,6 +21,7 @@ class Photo extends Model
         'url','likes_count','liked_by_user',
     ];
 
+    // 1ページ当たりの描写される写真の数
     protected $perPage = 9;
 
     //public $incrementing = false;
@@ -73,8 +74,12 @@ class Photo extends Model
 
     public function getUrlAttribute()
     {
-        return Storage::url('photos/'. $this->attributes['filename']);
+        $photoAttr = Storage::url('photos/'. $this->attributes['filename']);
+
+        return $photoAttr;
     }
+
+
 
     public function getLikesCountAttribute()
     {

@@ -1,15 +1,15 @@
 <template>
-    <div class="pagination ">
+    <div class="pagination">
         <RouterLink
             v-if="!isFirstPage"
-            :to="`/?page=${currentPage - 1}`"
+            :to="`?page=${currentPage - 1}`"
             class="button button--inverse"
             >&laquo; prev</RouterLink
         >
         <div v-else></div>
         <RouterLink
             v-if="!isLastPage"
-            :to="`/?page=${currentPage + 1}`"
+            :to="`?page=${currentPage + 1}`"
             class="button button--inverse"
             >next &raquo;
         </RouterLink>

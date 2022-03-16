@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Photo;
 use App\User;
+use GuzzleHttp\Psr7\UploadedFile as Psr7UploadedFile;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -32,12 +33,14 @@ class PhotoSubmitApiTest extends TestCase
         //$this->withoutExceptionHandling();
         // S3ではなくテスト用のストレージを使用する
         // → storage/framework/testing
-        Storage::fake('photos');
+        Storage::fake('profiles');
+        $up = UploadedFile::fake()->image('photo.jpg');
+
 
         $response = $this->actingAs($this->user)
-            ->json('POST', route('photo.create'), [
+            ->json('POST', route('profile.create'), [
                 // ダミーファイルを作成して送信している
-                UploadedFile::fake()->image('photo.jpg'),
+                $up
             ]);
 
         // レスポンスが201(CREATED)であること
@@ -47,10 +50,11 @@ class PhotoSubmitApiTest extends TestCase
 
         // 写真のIDが12桁のランダムな文字列であること
         $this->assertMatchesRegularExpression('/^[0-9a-zA-Z-_]{12}$/', $photo->id);
+        $up->move("storage/framework/testing/disks/profiles");
 
         // DBに挿入されたファイル名のファイルがストレージに保存されていること
         //Storage::cloud()->assertExists($photo->filename);
-        Storage::disk('photos')->assertExists($photo->filename);
+        Storage::disk('profiles')->assertExists($photo->filename);
 
     }
 

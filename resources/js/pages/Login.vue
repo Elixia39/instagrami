@@ -205,7 +205,7 @@ export default {
             }
         },
         async register() {
-            // authストアのresigterアクションを呼び出す
+            // authストアのregisterアクションを呼び出す
             await this.$store.dispatch("auth/register", this.registerForm);
             // トップページに移動する
             if (this.apiStatus) {

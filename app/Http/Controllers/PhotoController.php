@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Comment;
 use App\Http\Requests\StoreComment;
+use App\User;
 
 class PhotoController extends Controller
 {
@@ -24,9 +25,17 @@ class PhotoController extends Controller
     public function index()
     {
         $photos = Photo::with(['owner','likes'])->orderBy(Photo::CREATED_AT,'desc')->paginate();
+        return $photos;
+    }
+
+    // そもそもここでフィルター通すべきかも
+    public function userIndex()
+    {
+        $photos = Photo::with(['owner','likes'])->orderBy(Photo::CREATED_AT,'desc')->paginate();
 
         return $photos;
     }
+
 
     /**
      * 写真投稿
@@ -99,6 +108,44 @@ class PhotoController extends Controller
         $photo = Photo::where('id',$id)->with(['owner','comments.author','likes'])->first();
 
         return $photo ?? abort(404);
+    }
+
+    public function profileCreate(StorePhoto $request)
+    {
+        // 投稿写真の拡張子を取得する
+        $extension = $request->photo->extension();
+
+        $photo = new Photo();
+        $user = Auth::user();
+
+        // インスタンス生成時に割り振られたランダムなID値と
+        // 本来の拡張子を組み合わせてファイル名とする
+        $photo->filename = $photo->id . '.' . $extension;
+
+        // storage/app/public配下に保存する
+        //Storage::putFileAs('photos', $photo->filename, 'public');
+        $request->photo->storeAs('profiles', $photo->filename, 'public');
+
+        // データベースエラー時にファイル削除を行うため
+        // トランザクションを利用する
+        DB::beginTransaction();
+
+        try {
+            $user->profile_image = $photo->filename;
+            $user->save();
+            //Auth::user()->photos()->save($photo);
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            // DBとの不整合を避けるためアップロードしたファイルを削除
+            Storage::disk()->delete($photo->filename);
+            throw $exception;
+        }
+
+        // リソースの新規作成なので
+        // レスポンスコードは201(CREATED)を返却する
+        return response($photo, 201);
+
     }
 
     /**

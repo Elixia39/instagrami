@@ -48,7 +48,7 @@ export default {
             );
 
             if (response.status !== OK) {
-                this.$store.commit("eeror/setCode", response.status);
+                this.$store.commit("error/setCode", response.status);
                 return false;
             }
             this.photos = response.data.data;

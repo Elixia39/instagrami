@@ -1,5 +1,6 @@
 <?php
 
+use App\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,10 @@ Route::post('/register', 'Auth\RegisterController@register')->name('register');
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/user', fn() => Auth::user())->name('user');
+
+// ゆーざーぺーじ(試作中)
+Route::get('/userpage', 'PhotoController@index')->name('photo.index');
+Route::post('/userpage', 'PhotoController@profileCreate')->name('profile.create');
 
 // 写真回り
 Route::post('/photos', 'PhotoController@create')->name('photo.create');

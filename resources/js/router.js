@@ -7,6 +7,7 @@ import Login from "./pages/Login.vue";
 import SystemError from "./pages/errors/System.vue";
 import NotFound from "./pages/errors/NotFound.vue";
 import PhotoDetail from "./pages/PhotoDetail";
+import UserPage from "./pages/UserPage";
 
 import store from "./store";
 
@@ -37,6 +38,27 @@ const routes = [
                 next("/");
             } else {
                 next();
+            }
+        }
+    },
+    {
+        path: "/userpage/:id/:userid",
+        component: UserPage,
+        props: true,
+        beforeEnter: (to, from, next) => {
+            function validation() {
+                if (
+                    to.params.id == store.getters["auth/userid"] &&
+                    to.params.userid == store.getters["auth/username"]
+                )
+                    return true;
+                return false;
+            }
+
+            if (validation()) {
+                next();
+            } else {
+                next("/");
             }
         }
     },

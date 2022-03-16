@@ -9,7 +9,9 @@ const state = {
 
 const getters = {
     check: state => !!state.user,
-    username: state => (state.user ? state.user.name : "")
+    username: state => (state.user ? state.user.name : ""),
+    userid: state => (state.user ? state.user.id : ""),
+    userProfile: state => (state.user ? state.user.profile_image : "")
 };
 
 const mutations = {

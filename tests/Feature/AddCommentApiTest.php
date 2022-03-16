@@ -32,7 +32,7 @@ class AddCommentApiTest extends TestCase
 
         $this->withoutExceptionHandling();
 
-        
+
         factory(Photo::class)->create();
         $photo = Photo::first();
 
@@ -49,7 +49,10 @@ class AddCommentApiTest extends TestCase
             // JSONフォーマットが期待通りであること
             ->assertJsonFragment([
                 "author" => [
+                    "id" => $this->user->id,
                     "name" => $this->user->name,
+                    "profile_image" => "default.png",
+                    "url" => "/storage/profiles/default.png"
                 ],
                 "content" => $content,
             ]);

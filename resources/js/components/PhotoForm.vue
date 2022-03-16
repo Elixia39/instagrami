@@ -4,6 +4,7 @@
         <div v-show="loading" class="card">
             <Loader> Sending your photo... </Loader>
         </div>
+
         <form v-show="!loading" class="photoform" @submit.prevent="submit">
             <div class="errors" v-if="errors">
                 <ul v-if="errors.photo">
@@ -105,8 +106,16 @@ export default {
                 content: "写真投稿したぽ",
                 timeout: 6000
             });
+            console.log(response);
 
-            this.$router.push(`/`);
+            // なぜか機能しないのでトップページに行くように設定しました
+            //this.$router.push(`/photos/${response.data.id}`);
+            //this.$router.push("/", () => {});
+            // 現在のページを更新
+            this.$router.go({
+                path: this.$router.currentRoute.path,
+                force: true
+            });
         }
     }
 };

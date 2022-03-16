@@ -9,7 +9,16 @@
             @click="fullWidth = !fullWidth"
         >
             <img :src="photo.url" alt="" />
-            <figcaption>Posted by {{ photo.owner.name }}</figcaption>
+            <figcaption>
+                Posted by {{ photo.owner.name }}
+
+                <img
+                    :src="photo.owner.url"
+                    :alt="photo.owner.name"
+                    width="50"
+                    height="50"
+                />
+            </figcaption>
         </figure>
         <div class="photo-detail__panel">
             <button

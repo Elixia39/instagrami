@@ -26,6 +26,7 @@ class RegisterApiTest extends TestCase
             'email' => 'dummy@email.com',
             'password' => 'test1234',
             'password_confirmation' => 'test1234',
+            'profile_image' => 'default.png'
         ];
 
         $response = $this->json('POST', route('register'), $data);
