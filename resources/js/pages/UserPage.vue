@@ -4,6 +4,7 @@
         <div class="photo-detail2 photo-detail__B-board">
             <div class="photo-detail2__panel">
                 <img :src="data.url" alt="" />
+                <!-- <img :src="data.public_id" alt="" /> -->
             </div>
             <div class="photo-detail2__panel">
                 <button class="button" @click="showForm = !showForm">

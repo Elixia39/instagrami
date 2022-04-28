@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Comment;
 use App\Http\Requests\StoreComment;
 use App\User;
+use Cloudinary;
+use Cloudinary\Cloudinary as CloudinaryCloudinary;
 
 class PhotoController extends Controller
 {
@@ -61,9 +63,17 @@ class PhotoController extends Controller
         // トランザクションを利用する
         DB::beginTransaction();
 
+        //dd($request->photo,$photo);
+        $uploadedFileUrl = Cloudinary::upload($request->photo->getRealPath())->getSecurePath();
+
+        $photo->public_id = $uploadedFileUrl;
+
+        //dd($uploadedFileUrl,$photo->filename,$photo->public_id);
+
         try {
             Auth::user()->photos()->save($photo);
             DB::commit();
+
         } catch (\Exception $exception) {
             DB::rollBack();
             // DBとの不整合を避けるためアップロードしたファイルを削除
@@ -130,7 +140,12 @@ class PhotoController extends Controller
         // トランザクションを利用する
         DB::beginTransaction();
 
+        $uploadedFileUrl = Cloudinary::upload($request->photo->getRealPath(),['width' => 800 ,])->getSecurePath();
+
+        //dd($photo->public_id,$uploadedFileUrl,$user->public_id);
+
         try {
+            $user->public_id = $uploadedFileUrl;
             $user->profile_image = $photo->filename;
             $user->save();
             //Auth::user()->photos()->save($photo);

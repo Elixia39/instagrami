@@ -20,6 +20,12 @@
                         width="30px"
                         height="30px"
                     />
+                    <!-- <img
+                        :src="data.public_id"
+                        alt="プロフィール画像"
+                        width="30px"
+                        height="30px"
+                    /> -->
                 </RouterLink>
             </span>
 

@@ -6,6 +6,11 @@
                 :src="item.url"
                 :alt="`Photo by ${item.owner.name}`"
             />
+            <!-- <img
+                class="photo__image"
+                :src="item.public_id"
+                :alt="`Photo by ${item.owner.name}`"
+            /> -->
         </figure>
         <RouterLink
             class="photo__overlay"

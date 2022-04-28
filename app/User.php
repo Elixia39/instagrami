@@ -12,7 +12,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $visible = [
-        'name','id','profile_image','url'
+        'name','id','profile_image','url','public_id'
     ];
 
     protected $appends = [

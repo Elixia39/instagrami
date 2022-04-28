@@ -14,7 +14,7 @@ class Photo extends Model
 
     protected $visible = [
         'id','owner','url','comments',
-        'likes_count','liked_by_user',
+        'likes_count','liked_by_user','public_id'
     ];
 
     protected $appends = [
