@@ -8,23 +8,23 @@
             class="photo-detail__panel photo-detail__image"
             @click="fullWidth = !fullWidth"
         >
-            <!-- <img :src="photo.public_id" alt="" /> -->
-            <img :src="photo.url" alt="" />
+            <img :src="photo.public_id" alt="" />
+            <!-- <img :src="photo.url" alt="" /> -->
             <figcaption>
                 Posted by {{ photo.owner.name }}
 
-                <img
+                <!-- <img
                     :src="photo.owner.url"
                     :alt="photo.owner.name"
                     width="50"
                     height="50"
-                />
-                <!-- <img
+                /> -->
+                <img
                     :src="photo.owner.public_id"
                     :alt="photo.owner.name"
                     width="50"
                     height="50"
-                /> -->
+                />
             </figcaption>
         </figure>
         <div class="photo-detail__panel">

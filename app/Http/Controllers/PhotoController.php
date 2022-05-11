@@ -64,7 +64,7 @@ class PhotoController extends Controller
         DB::beginTransaction();
 
         //dd($request->photo,$photo);
-        $uploadedFileUrl = Cloudinary::upload($request->photo->getRealPath())->getSecurePath();
+        $uploadedFileUrl = Cloudinary::upload($request->photo->getRealPath(),['width' => 1200 ,])->getSecurePath();
 
         $photo->public_id = $uploadedFileUrl;
 
