@@ -14,18 +14,28 @@
 
             <span v-if="isLogin" class="navbar2__item">
                 <RouterLink :to="`/userpage/${data.id}/${data.name}`">
-                    <img
+                    <!-- <img
                         :src="data.url"
                         alt="プロフィール画像"
                         width="30px"
                         height="30px"
-                    />
-                    <!-- <img
-                        :src="data.public_id"
-                        alt="プロフィール画像"
-                        width="30px"
-                        height="30px"
                     /> -->
+                    <div v-if="data.public_id">
+                        <img
+                            :src="data.public_id"
+                            alt="プロフィール画像"
+                            width="30px"
+                            height="30px"
+                        />
+                    </div>
+                    <div v-else>
+                        <img
+                            src="https://res.cloudinary.com/milia3939/image/upload/v1652763666/profiles/default_fct1ak.png"
+                            alt="プロフィール画像"
+                            width="30px"
+                            height="30px"
+                        />
+                    </div>
                 </RouterLink>
             </span>
 
