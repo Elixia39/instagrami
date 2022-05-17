@@ -30,7 +30,7 @@
                     </div>
                     <div v-else>
                         <img
-                            src="https://res.cloudinary.com/milia3939/image/upload/v1652763666/profiles/default_fct1ak.png"
+                            :src="defaultProfile"
                             alt="プロフィール画像"
                             width="30px"
                             height="30px"
@@ -87,7 +87,9 @@ export default {
         return {
             showForm: false,
             active: false,
-            data: []
+            data: [],
+            defaultProfile:
+                "https://res.cloudinary.com/milia3939/image/upload/v1652763666/profiles/default_fct1ak.png"
         };
     },
     computed: {
