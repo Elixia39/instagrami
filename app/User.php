@@ -40,7 +40,14 @@ class User extends Authenticatable
 
     public function getUrlAttribute()
     {
+        // ここ汚いコード
         $user = Auth::user();
+        // ログインしていなければここをスルーする
+        if (!$user) {
+            return false;
+        };
+        // 初ログイン時に何故かprofile_imageが作られないのでここに入れる
+        // データベースには入らないから一時しのぎの方法
         if ($user->profile_image == NULL) {
             $default = 'Gorilla.jpeg';
             $user->profile_image = $default;
