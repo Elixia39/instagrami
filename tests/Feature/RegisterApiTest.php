@@ -21,19 +21,24 @@ class RegisterApiTest extends TestCase
      */
     public function should_新しいユーザーを作成して返却する()
     {
+
+        $this->withoutExceptionHandling();
         $data = [
-            'name' => 'testuser',
+            'name' => 'testMan',
             'email' => 'dummy@email.com',
             'password' => 'test1234',
             'password_confirmation' => 'test1234',
-            'profile_image' => 'default.png'
+            'profile_image' => 'aaaDefault.png'
         ];
 
-        $response = $this->json('POST', route('register'), $data);
 
+        $response = $this->json('POST', route('register'), $data);
+        //dd($response);
         $user = User::first();
+
         $this->assertEquals($data['name'], $user->name);
 
+        dd($user,$data);
         $response
             ->assertStatus(201)
             ->assertJson(['name' => $user->name]);

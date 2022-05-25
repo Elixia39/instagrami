@@ -64,7 +64,8 @@ class PhotoController extends Controller
         DB::beginTransaction();
 
         //dd($request->photo,$photo);
-        $uploadedFileUrl = Cloudinary::upload($request->photo->getRealPath(),['width' => 1200 ,])->getSecurePath();
+
+        $uploadedFileUrl = Cloudinary::upload($request->photo->getRealPath(),["folder" => "photos" ,'width' => 1200 ,])->getSecurePath();
 
         $photo->public_id = $uploadedFileUrl;
 
@@ -140,7 +141,7 @@ class PhotoController extends Controller
         // トランザクションを利用する
         DB::beginTransaction();
 
-        $uploadedFileUrl = Cloudinary::upload($request->photo->getRealPath(),['width' => 800 ,])->getSecurePath();
+        $uploadedFileUrl = Cloudinary::upload($request->photo->getRealPath(),["folder" => "profiles",'width' => 800 ,])->getSecurePath();
 
         //dd($photo->public_id,$uploadedFileUrl,$user->public_id);
 

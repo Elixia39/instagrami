@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -39,8 +40,13 @@ class User extends Authenticatable
 
     public function getUrlAttribute()
     {
-        $userAttr = Storage::url('profiles/'. $this->attributes['profile_image']);
+        $user = Auth::user();
+        if ($user->profile_image == NULL) {
+            $default = 'Gorilla.jpeg';
+            $user->profile_image = $default;
+        };
 
+        $userAttr = Storage::url('profiles/'. $this->attributes['profile_image']);
         return $userAttr;
     }
 

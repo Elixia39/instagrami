@@ -171,7 +171,8 @@ export default {
                 name: "",
                 email: "",
                 password: "",
-                password_confirmation: ""
+                password_confirmation: "",
+                profile_image: "default.png"
             }
         };
     },
@@ -210,6 +211,9 @@ export default {
             // トップページに移動する
             if (this.apiStatus) {
                 this.$router.push("/");
+                console.log("とぅるー");
+            } else {
+                console.log("ふぁるす");
             }
         },
         clearError() {
