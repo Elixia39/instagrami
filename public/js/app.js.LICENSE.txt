@@ -5,14 +5,6 @@
   */
 
 /*!
- * BootstrapVue Icons, generated from Bootstrap Icons 1.2.2
- *
- * @link https://icons.getbootstrap.com/
- * @license MIT
- * https://github.com/twbs/icons/blob/master/LICENSE.md
- */
-
-/*!
  * Sizzle CSS Selector Engine v2.3.6
  * https://sizzlejs.com/
  *
@@ -55,17 +47,6 @@
  * @license MIT
  */
 
-/*! 
-  * portal-vue © Thorsten Lünborg, 2019 
-  * 
-  * Version: 2.1.7
-  * 
-  * LICENCE: MIT 
-  * 
-  * https://github.com/linusborg/portal-vue
-  * 
- */
-
 /*! *****************************************************************************
 Copyright (C) Microsoft. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -95,6 +76,8 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
+
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
 
 /**
   * bootstrap-show-password - Show/hide password plugin for twitter bootstrap.

@@ -11,5 +11,14 @@ const mix = require("laravel-mix");
  |
  */
 
-mix.js("resources/js/app.js", "public/js");
-mix.sass("resources/sass/app.scss", "public/css");
+mix.js("resources/js/app.js", "public/js")
+    .sass("resources/sass/app.scss", "public/css")
+    .vue({ version: 2 });
+
+mix.disableNotifications();
+
+mix.webpackConfig({
+    stats: {
+        children: true,
+    },
+});

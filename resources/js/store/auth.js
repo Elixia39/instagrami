@@ -4,14 +4,14 @@ const state = {
     user: null,
     apiStatus: null,
     loginErrorMessages: null,
-    registerErrorMessages: null
+    registerErrorMessages: null,
 };
 
 const getters = {
-    check: state => !!state.user,
-    username: state => (state.user ? state.user.name : ""),
-    userid: state => (state.user ? state.user.id : ""),
-    userProfile: state => (state.user ? state.user.profile_image : "")
+    check: (state) => !!state.user,
+    username: (state) => (state.user ? state.user.name : ""),
+    userid: (state) => (state.user ? state.user.id : ""),
+    userProfile: (state) => (state.user ? state.user.profile_image : ""),
 };
 
 const mutations = {
@@ -26,7 +26,7 @@ const mutations = {
     },
     setRegisterErrorMessages(state, messages) {
         state.registerErrorMessages = messages;
-    }
+    },
 };
 
 const actions = {
@@ -94,7 +94,7 @@ const actions = {
 
         context.commit("setApiStatus", false);
         context.commit("error/setCode", response.status, { root: true });
-    }
+    },
 };
 
 export default {
@@ -102,5 +102,5 @@ export default {
     state,
     getters,
     mutations,
-    actions
+    actions,
 };
